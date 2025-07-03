@@ -1,0 +1,96 @@
+<?php require('template/header.phtml') ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        ecoBuddy
+        home</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+
+          content="width=device-width, initial-scale=1">
+    <!-- these libraries are locally stored, fix this -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
+    <!-- MY OWN CSS -->
+    <link rel="stylesheet"
+          href="../css/index.css">
+</head>
+<body>
+<!--logo -->
+<div class="container-fluid">
+    <div class="row content">
+        <!-- SIDEBAR START -->
+        <div class="col-sm-3 sidenav">
+            <img src='/../ecoBuddy/images/logo.png'
+                 height="aut"
+                 width="100%" alt="logo">
+            <br>
+            <ul>
+                <li>
+                    <a href="#">link</a>
+                </li>
+                <li>
+                    <a href="#">link</a>
+                </li>
+                <li>
+                    <a href="#">link</a>
+                </li>
+            </ul>
+        </div>
+        <!--SIDEBAR END -->
+
+        <div class="col-sm-9">
+            <!-- SEARCH FORM -->
+            <div class="input-group"
+                 id="search">
+                <label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search Facilities..">
+                </label>
+                <span class="input-group-btn">
+          <button class="btn btn-default"
+                  type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+            </div>
+
+            <h4>
+                <small>TEXT</small>
+            </h4>
+            <hr>
+            <?php
+            // Views/index.phtml
+            require_once __DIR__ . '/template/header.phtml';
+            ?>
+
+            <main class="container">
+                <h1><?= htmlspecialchars($view->pageTitle) ?></h1>
+
+                <!-- Include the list partial -->
+                <?php
+                if (isset($view->facilities)) {
+                    // Pass required variables to the partial
+                    $facilities = $view->facilities;
+                    require __DIR__ . '/eco-facility/list.phtml';
+                }
+                ?>
+            </main>
+
+            <?php
+            require_once __DIR__ . '/template/footer.phtml';
+            ?>?>
+            <hr>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

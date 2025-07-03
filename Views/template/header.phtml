@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/ecoBuddy/css/bootstrap.min.css">
+<link rel="stylesheet" href="/ecoBuddy/css/header.css">
+
+<!--  NAVBAR START  -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand"
+       href="#">ecoBuddy</a>
+
+    <!-- Mobile toggle button -->
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse"
+         id="navbarContent">
+        <!-- Left-aligned menu items -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link"
+                   href="/ecoBuddy/index">Home</a>">
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   id="dropdownPostcode"
+                   data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    Postcode
+                </a>
+                <div class="dropdown-menu"
+                     aria-labelledby="dropdownPostcode">
+                    <a class="dropdown-item"
+                       href="#">Manchester</a>
+                    <a class="dropdown-item"
+                       href="#">Salford</a>
+                    <a class="dropdown-item"
+                       href="#">Leeds</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   id="dropdownFacilities"
+                   data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    Facilities
+                </a>
+                <div class="dropdown-menu"
+                     aria-labelledby="dropdownFacilities">
+                    <a class="dropdown-item"
+                       href="#">bins</a>
+                    <a class="dropdown-item"
+                       href="#">scooters</a>
+                    <a class="dropdown-item"
+                       href="#">M3</a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Right-aligned login button -->
+        <div class="ml-auto">
+            <a href="/ecoBuddy/Views/login.phtml"
+               class="btn btn-primary">Login</a>
+        </div>
+    </div>
+</nav>
+<!--  NAVBAR END  -->
