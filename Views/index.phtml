@@ -45,42 +45,19 @@
         <!--SIDEBAR END -->
 
         <div class="col-sm-9">
-            <!-- SEARCH FORM -->
-            <div class="input-group"
-                 id="search">
-                <label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Search Facilities..">
-                </label>
-                <span class="input-group-btn">
-          <button class="btn btn-default"
-                  type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-            </div>
-
-            <h4>
-                <small>TEXT</small>
-            </h4>
             <hr>
             <?php
             // Views/index.phtml
             require_once __DIR__ . '/template/header.phtml';
             ?>
-
+                <!-- Search Form  -->
+                <?php require __DIR__ . '/template/search-form.phtml'; ?>
+                <hr>
             <main class="container">
-                <h1><?= htmlspecialchars($view->pageTitle) ?></h1>
-
-                <!-- Include the list partial -->
-                <?php
-                if (isset($view->facilities)) {
-                    // Pass required variables to the partial
-                    $facilities = $view->facilities;
-                    require __DIR__ . '/eco-facility/list.phtml';
-                }
-                ?>
+                <?php if (isset($view->facilities)): ?>
+                    <?php $facilities = $view->facilities; ?>
+                    <?php require __DIR__ . '/eco-facility/list.phtml'; ?>
+                <?php endif; ?>
             </main>
 
             <?php

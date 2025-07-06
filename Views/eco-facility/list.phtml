@@ -1,30 +1,21 @@
-<!-- 1. Always start with header -->
-<?php require_once '/../Views/template/header.phtml'; ?>
+<<!-- LIST VIEW -->
+<?php require_once __DIR__ . '/../template/header.phtml'; ?>
 
-<!-- 2. Show notifications -->
+<!-- Show notifications -->
 <?php if (isset($_SESSION['success'])): ?>
     <div class="alert alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
     <?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
-
-    <!-- Search Form -->
-    <form method="get" class="mb-4">
-        <input type="hidden" name="controller" value="ecoFacility">
-        <input type="hidden" name="action" value="search">
-        <div class="input-group">
-            <label>
-                <input type="text" name="keyword" class="form-control"
-                       placeholder="Search facilities...">
-            </label>
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-    </form>
-
-
 <!-- Results List -->
 <div class="row">
-    <?php foreach ($facilities as $facility): ?>
+    <?php if (isset($this->view->message)): ?>
+        <div class="col-12">
+            <div class="alert alert-info"><?= htmlspecialchars($this->view->message) ?></div>
+        </div>
+    <?php endif; ?>
+
+    <?php foreach ($this->view->facilities as $facility): ?>
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
@@ -32,9 +23,12 @@
                         <?= htmlspecialchars($facility['title'] ?? 'No title') ?>
                     </h5>
                     <p class="card-text">
-                        <?= htmlspecialchars($facility['category'] ?? 'Uncategorized') ?>
+                        <?= htmlspecialchars($facility['streetName'] ?? '') ?>
+                        <?php if (!empty($facility['description'])): ?>
+                            <br><?= htmlspecialchars($facility['description']) ?>
+                        <?php endif; ?>
                     </p>
-                    <a href="index.phpcontroller=ecoFacility&action=view&id=<?= $facility['id'] ?? '' ?>"
+                    <a href="/index.php?action=view&id=<?= (int)$facility['id'] ?>"
                        class="btn btn-sm btn-primary">
                         View Details
                     </a>
@@ -43,3 +37,5 @@
         </div>
     <?php endforeach; ?>
 </div>
+
+<?php require_once __DIR__ . '/../template/footer.phtml'; ?>

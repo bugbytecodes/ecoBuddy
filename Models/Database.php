@@ -1,36 +1,37 @@
 <?php
 // Models/Database.php
-class Database {
-    private static ?Database $instance = null;
-    private PDO $connection;
+class Database
+{
+    private ?PDO $connection = null;
 
     /**
      * @throws Exception
      */
-    private function __construct() {
-        try {
-            $this->connection = new PDO(
-                'sqlite:' . __DIR__ . '/../data/ecobuddy.db',
-                null,
-                null,
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]
-            );
-        } catch (PDOException $e) {
-            throw new Exception("Database connection failed: " . $e->getMessage());
+    public function __construct()
+    {
+        $dbPath = __DIR__ . '/../data/ecobuddy.sqlite';
+
+        if (!file_exists($dbPath)) {
+            throw new Exception("Database file not found at: $dbPath");
         }
+
+        $this->connection = new PDO(
+            'sqlite:' . $dbPath,
+            null,
+            null,
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]
+        );
     }
 
-    public static function getInstance(): Database {
-        if (self::$instance === null) {
-            self::$instance = new self();
+    public function getConnection(): PDO
+    {
+        if ($this->connection === null) {
+            throw new Exception("Database connection not initialized");
         }
-        return self::$instance;
-    }
-
-    public function getConnection(): PDO {
         return $this->connection;
     }
 }

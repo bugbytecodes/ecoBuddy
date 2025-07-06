@@ -1,0 +1,19 @@
+//DETAILED VIEW
+
+<div class="container facility-detail">
+    <h1><?= htmlspecialchars($this->view->facility['title']) ?></h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h3>Details</h3>
+            <p><strong>Category:</strong> <?= htmlspecialchars($this->view->facility['category']) ?>
+
+            <!--THIS DOESNT WORK< NO ADDRESS ROW iN DB-->
+            <p><strong>Location:</strong> <?= htmlspecialchars($facility['address'] ?? 'N/A') ?></p>
+
+            <a href="../../index.php?action=list" class="btn btn-secondary">
+                Back to List
+            </a>
+        </div>
+    </div>
+</div>
