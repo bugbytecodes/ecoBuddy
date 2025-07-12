@@ -1,41 +1,22 @@
-<<!-- LIST VIEW -->
+<!-- LIST VIEW -->
 <?php require_once __DIR__ . '/../template/header.phtml'; ?>
 
-<!-- Show notifications -->
-<?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
-    <?php unset($_SESSION['success']); ?>
-<?php endif; ?>
-
 <!-- Results List -->
-<div class="row">
-    <?php if (isset($this->view->message)): ?>
-        <div class="col-12">
-            <div class="alert alert-info"><?= htmlspecialchars($this->view->message) ?></div>
-        </div>
-    <?php endif; ?>
-
-    <?php foreach ($this->view->facilities as $facility): ?>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <?= htmlspecialchars($facility['title'] ?? 'No title') ?>
-                    </h5>
-                    <p class="card-text">
-                        <?= htmlspecialchars($facility['streetName'] ?? '') ?>
-                        <?php if (!empty($facility['description'])): ?>
-                            <br><?= htmlspecialchars($facility['description']) ?>
-                        <?php endif; ?>
-                    </p>
-                    <a href="/index.php?action=view&id=<?= (int)$facility['id'] ?>"
-                       class="btn btn-sm btn-primary">
-                        View Details
-                    </a>
-                </div>
+<!-- eco-facility/list.phtml -->
+<?php if (!empty($facilities)): ?>
+    <div class="facility-list">
+        <?php foreach ($facilities as $facility): ?>
+            <div class="facility-card">
+                <h3><?= htmlspecialchars($facility['title']) ?></h3>
+                <p>Category: <?= htmlspecialchars($facility['category']) ?></p>
+                <p>Location: <?= htmlspecialchars($facility['streetName']) ?>, <?= htmlspecialchars($facility['postcode']) ?></p>
             </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+        <?php endforeach; ?>
+    </div>
+<?php elseif (isset($view->searchTerm) && $view->searchTerm !== ''): ?>
+    <div class="alert alert-info mt-4">
+        No facilities found matching "<?= htmlspecialchars($view->searchTerm) ?>"
+    </div>
+<?php endif; ?>
 
 <?php require_once __DIR__ . '/../template/footer.phtml'; ?>

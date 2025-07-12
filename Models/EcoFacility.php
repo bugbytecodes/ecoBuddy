@@ -13,19 +13,17 @@ class EcoFacility
         $this->db = $db;
     }
 
+// models/EcoFacility.php
     public function search(string $term): array
     {
         $stmt = $this->db->prepare("SELECT * FROM ecoFacilities 
-                               WHERE title LIKE ? 
-                               OR description LIKE ?");
-        $stmt->execute(["%$term%", "%$term%"]);
+                           WHERE title LIKE ? 
+                           OR category LIKE ?
+                           OR streetname LIKE ?
+                           OR postcode LIKE ?");
+        $searchTerm = "%$term%";
+        $stmt->execute([$searchTerm, $searchTerm, $searchTerm, $searchTerm]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-    }
-    public function getById(int $id): array|false
-    {
-        $stmt = $this->db->prepare("SELECT * FROM ecoFacilities WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getAllFacilities(): array
