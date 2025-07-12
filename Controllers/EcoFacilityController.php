@@ -13,29 +13,33 @@ class EcoFacilityController
         $this->view->siteName = 'EcoBuddy';
     }
 
+    // EcoFacilityController.php
     public function searchAction(): void
     {
-        // Create view object if it doesn't exist
+        error_log("SEARCH ACTION CALLED! Query: " . ($_GET['query'] ?? 'NULL'));
+
+        // Ensure view exists
         if (!isset($this->view)) {
             $this->view = new stdClass();
+            error_log("Created new view object in searchAction");
         }
 
-        // Set search term
+        // Set view properties
         $this->view->searchTerm = $_GET['query'] ?? '';
+        $this->view->facilities = !empty($this->view->searchTerm)
+            ? $this->facilityModel->search($this->view->searchTerm)
+            : [];
 
-        // Perform search
-        $this->view->facilities = $this->facilityModel->search($this->view->searchTerm);
+        // Make view available to template
+        $view = $this->view; // Critical - makes $view available in template scope
 
-        // Render the view
-        $this->render('eco-facility/list.phtml');
+        // Debug before requiring template
+        error_log("View contents before render: " . print_r($this->view, true));
+
+        // Directly include the template
+        require __DIR__ . '/../Views/index.phtml';
     }
 
-    private function render(string $template): void
-    {
-        // Make view properties available to template
-        $view = $this->view;
-        require __DIR__ . '/../Views/' . $template;
-    }
 
     public function viewAction(int $id): void {
         try {
@@ -67,7 +71,7 @@ class EcoFacilityController
         $this->view->pageTitle = 'All Eco Facilities';
 
         // Load view
-        require __DIR__ . '/../Views/eco-facility/list.phtml';
+        require __DIR__ . '/../Views/index.phtml';
     }
 
 

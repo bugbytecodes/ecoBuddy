@@ -1,5 +1,12 @@
 <?php require('template/header.phtml') ?>
-
+<?php
+/*
+echo "<pre>Debug Info:\n";
+echo "GET parameters: "; print_r($_GET);
+echo "View contents: "; print_r($view ?? 'No view object');
+echo "</pre>";
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +35,8 @@
         <div class="col-sm-3 sidenav">
             <img src='/../ecoBuddy/images/logo.png'
                  height="aut"
-                 width="100%" alt="logo">
+                 width="100%"
+                 alt="logo">
             <br>
             <ul>
                 <li>
@@ -50,9 +58,9 @@
             // Views/index.phtml
             require_once __DIR__ . '/template/header.phtml';
             ?>
-                <!-- Search Form  -->
-                <?php require __DIR__ . '/template/search-form.phtml'; ?>
-                <hr>
+            <!-- Search Form  -->
+            <?php require __DIR__ . '/template/search-form.phtml'; ?>
+            <hr>
             <main class="container">
                 <?php if (isset($view->facilities)): ?>
                     <?php $facilities = $view->facilities; ?>
@@ -62,7 +70,7 @@
 
             <?php
             require_once __DIR__ . '/template/footer.phtml';
-            ?>?>
+            ?>
             <hr>
         </div>
     </div>

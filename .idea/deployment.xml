@@ -12,7 +12,7 @@
       <paths name="Databasetest">
         <serverdata>
           <mappings>
-            <mapping deploy="\" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="\ecoBuddy" local="$PROJECT_DIR$" web="/ecoBuddy" />
           </mappings>
         </serverdata>
       </paths>
